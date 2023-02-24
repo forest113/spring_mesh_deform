@@ -5,7 +5,7 @@ using namespace std;
 #define PM_MASS 0.1       //mass of each vertex
 #define SPRING_K 0.03    //spring constant
 #define SPRING_DAMP 0.0000001 //damping force constant
-#define NUM_ITR 150       //number of iterations to simulate
+#define NUM_ITR 10      //number of iterations to simulate
 
 
 /* A 3D vector class. */

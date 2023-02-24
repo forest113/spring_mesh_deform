@@ -31,7 +31,7 @@ int main() {
 	string c;
 	ifstream fin;
 	/* read the mesh. */
-	fin.open("test.hex", ios::in);
+	fin.open("sphere.hex", ios::in);
 	if (!fin) {
 		std::cerr << "There was a problem opening the input file!\n";
 		exit(1);//exit or do additional error checking
@@ -111,7 +111,7 @@ int main() {
 
 	/* read input. */
 	ifstream fin1;
-	fin1.open("input.txt", ios::in);
+	fin1.open("input1.txt", ios::in);
 	if (!fin1) {
 		std::cerr << "There was a problem opening the input file!\n";
 		exit(1);//exit or do additional error checking
@@ -124,6 +124,15 @@ int main() {
 		//cout << "Enter " << i << "th" << "fixed point index" << endl;
 		fin1 >> ind;
 		points_list[ind].is_fixed = true;
+	}
+
+	if (num_fixed == 0) {
+		//cout << "numspinrgs" << endl;
+		for (int i = 0; i < points_list.size(); i++) {
+			if (points_list[i].num_springs < 6) {
+				points_list[i].is_fixed = true;
+			}
+		}cout << endl; 
 	}
 
 	int num_D_n = 0;
@@ -148,9 +157,10 @@ int main() {
 
 	}
 
-	cout << "points:" << endl;
+	ofstream fout("sphere.obj");
+	//cout << "points:" << endl;
 	for (int i = 0; i < points_list.size(); i++) {
-		cout << "v " << points_list[i].pos.x << " " << points_list[i].pos.y << " " << points_list[i].pos.z << endl;
+		fout << "v " << points_list[i].pos.x << " " << points_list[i].pos.y << " " << points_list[i].pos.z << endl;
 
 	}
 	for (itr = edges.begin();
@@ -160,7 +170,7 @@ int main() {
 		vector<int> edge = *itr;
 		int p1 = edge[0];
 		int p2 = edge[1];
-		cout << "l " << p1 << " " << p2 << endl;
+		fout << "l " << p1 << " " << p2 << endl;
 	}
 
 
